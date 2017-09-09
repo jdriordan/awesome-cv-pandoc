@@ -53,23 +53,25 @@
 %-------------------------------------------------------------------------------
 % Available options: circle|rectangle,edge/noedge,left/right
 % \photo[rectangle,edge,right]{./src/profile}
-\name{Byungjin}{Park}
-\position{Software Engineer{\enskip\cdotp\enskip}Security Expert}
-\address{246-1002, Gwangmyeongmayrouge Apt. 86, Cheongna lime-ro, Seo-gu, Incheon-si, 404-180, Rep. of KOREA}
+\name{$first_name$}{$last_name$}
+\position{$position_first${\enskip\cdotp\enskip}$position_second$}
+\address{$address$}
 
-\mobile{(+82) 10-9030-1843}
-\email{posquit0.bj@gmail.com}
-\homepage{www.posquit0.com}
-\github{posquit0}
-\linkedin{posquit0}
-% \gitlab{gitlab-id}
-% \stackoverflow{SO-id}{SO-name}
-% \twitter{@twit}
-% \skype{skype-id}
-% \reddit{reddit-id}
-% \extrainfo{extra informations}
+\mobile{$mobile$}
+\email{$email$}
+\homepage{$homepage$}
+\github{$github-id$}
+\linkedin{$linkedin-id$}
+% \gitlab{$gitlab-id$}
+% \stackoverflow{$stackoverflow-id$}{$stackoverflow-name$}
+% \twitter{$twitter-handle$}
+% \skype{$skype-id$}
+% \reddit{$reddit-id$}
+% \extrainfo{$extra-information$}
 
-\quote{``Be the change that you want to see in the world."}
+$if(quote)$
+\quote{``$quote$"}
+$endif$
 
 
 %-------------------------------------------------------------------------------
@@ -83,7 +85,7 @@
 % Leave any of these blank if they are not needed
 \makecvfooter
   {\today}
-  {Claud D. Park~~~·~~~Résumé}
+  {$first_name$ $last_name$~~~\textperiodcentered~~~$resume_title$}
   {\thepage}
 
 
@@ -91,15 +93,191 @@
 %	CV/RESUME CONTENT
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
-\input{src/resume/summary.tex}
-\input{src/resume/experience.tex}
-\input{src/resume/honors.tex}
-\input{src/resume/presentation.tex}
-\input{src/resume/writing.tex}
-\input{src/resume/committees.tex}
-\input{src/resume/education.tex}
-\input{src/resume/extracurricular.tex}
-
 
 %-------------------------------------------------------------------------------
+%	SUMMARY
+%-------------------------------------------------------------------------------
+\cvsection{Summary}
+
+\begin{cvparagraph}
+  Current Co-founder \& Software Engineer in start-up company PLAT Corp. 5+ years experience specializing in backend/infrastructure, web development and computer security. Super nerd who loves Vim, Linux and OS X and enjoys to customize all of the development environment. Interested in devising a better problem-solving method for challenging tasks, and learning new technologies and tools if the need arises.
+\end{cvparagraph}
+
+%-------------------------------------------------------------------------------
+%	WORK EXPERIENCE
+%-------------------------------------------------------------------------------
+
+$if(experience)$
+\cvsection{$work_experience_title$}
+
+\begin{cventries}
+  $for(experience)$
+  \cventry
+  {$experience.jobtitle$}
+  {$experience.organization$}
+  {$experience.location$}
+  {$experience.date$}
+  {
+  \begin{cvitems}
+    $for(experience.task)$
+    \item {$experience.task$}
+    $endfor$
+  \end{cvitems}
+  }
+  $endfor$
+\end{cventries}
+$endif$
+
+%-------------------------------------------------------------------------------
+%	HONORS AND AWARDS
+%-------------------------------------------------------------------------------
+
+$if(honor_domestic)$
+\cvsection{$honors_title$}
+
+\cvsubsection{$honors_international_title$}
+
+\begin{cvhonors}
+  $for(honor_international)$
+  \cvhonor
+  {$honor_international.award$} % Award
+  {$honor_international.event$} % Event
+  {$honor_international.location$} % Location
+  {$honor_international.date$} % Date(s)
+  $endfor$
+\end{cvhonors}
+
+\cvsubsection{$honors_domestic_title$}
+
+\begin{cvhonors}
+  $for(honor_domestic)$
+  \cvhonor
+  {$honor_domestic.award$} % Award
+  {$honor_domestic.event$} % Event
+  {$honor_domestic.location$} % Location
+  {$honor_domestic.date$} % Date(s)
+  $endfor$
+\end{cvhonors}
+$endif$
+
+%-------------------------------------------------------------------------------
+%	PRESENTATION
+%-------------------------------------------------------------------------------
+
+$if(presentation)$
+\cvsection{$presentation_title$}
+
+\begin{cventries}
+  $for(presentation)$
+  \cventry
+  {$presentation.role$} % Role
+  {$presentation.event$} % Event
+  {$presentation.location$} % Location
+  {$presentation.date$} % Date(s)
+  {
+  \begin{cvitems}
+    $for(presentation.description)$
+    \item {$presentation.description$}
+    $endfor$
+  \end{cvitems}
+  }
+  $endfor$
+\end{cventries}
+$endif$
+
+%-------------------------------------------------------------------------------
+%	WRITING
+%-------------------------------------------------------------------------------
+
+$if(writing)$
+\cvsection{$writing_title$}
+
+\begin{cventries}
+  $for(writing)$
+  \cventry
+  {$writing.role$} % Role
+  {$writing.event$} % Event
+  {$writing.location$} % Location
+  {$writing.date$} % Date(s)
+  {
+  \begin{cvitems}
+    $for(writing.description)$
+    \item {$writing.description$}
+    $endfor$
+  \end{cvitems}
+  }
+  $endfor$
+\end{cventries}
+$endif$
+
+%-------------------------------------------------------------------------------
+%	Program Committees
+%-------------------------------------------------------------------------------
+
+$if(committee)$
+\cvsection{$committee_title$}
+
+\begin{cvhonors}
+  $for(committee)$
+  \cvhonor
+  {$committee.position$} % Position
+  {$committee.committee$} % Committee
+  {$committee.location$} % Location
+  {$committee.date$} % Date(s)
+  $endfor$
+\end{cvhonors}
+$endif$
+
+\end{document}
+
+%-------------------------------------------------------------------------------
+%	EDUCATION
+%-------------------------------------------------------------------------------
+
+$if(education)$
+\cvsection{$education_title$}
+
+\begin{cventries}
+  $for(education)$
+  \cventry
+  {$education.degree$} % Degree
+  {$education.institution$} % Institution
+  {$education.location$} % Location
+  {$education.date$} % Date(s)
+  {
+  \begin{cvitems}
+    $for(education.description)$
+    \item {$education.description.text$}
+    $endfor$
+  \end{cvitems}
+  }
+  $endfor$
+\end{cventries}
+$endif$
+
+%-------------------------------------------------------------------------------
+%	EXTRACURRICULAR ACTIVITIES
+%-------------------------------------------------------------------------------
+
+$if(extracurricular)$
+\cvsection{$extracurricular_title$}
+
+\begin{cventries}
+  $for(extracurricular)$
+  \cventry
+  {$extracurricular.role$} % Affiliation/role
+  {$extracurricular.organization$} % Organization/group
+  {$extracurricular.location$} % Location
+  {extracurricular.date} % Date(s)
+  {
+  \begin{cvitems}
+    $for(extracurricular.contribution)$
+    \item {$extracurricular.contribution$}
+    $endfor$
+  \end{cvitems}
+  }
+  $endfor$
+\end{cventries}
+$endif$
+
 \end{document}
