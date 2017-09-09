@@ -1,0 +1,30 @@
+group 'de.interoberlin'
+version '0.0.1'
+
+task clean(type: Delete) {
+    delete fileTree('output').include('**/*')
+}
+
+task pandocWin {
+    dependsOn 'clean'
+    dependsOn 'createOutputDir'
+    dependsOn 'pandocCoverletterWin'
+    dependsOn 'pandocResumeWin'
+    dependsOn 'pandocCvWin'
+}
+
+task createOutputDir() {
+    mkdir('./output')
+}
+
+task pandocCoverletterWin(type: Exec) {
+    commandLine 'cmd', '/c', 'pandoc .\\src\\res\\data.yml -o output\\coverletter.pdf --template=src\\coverletter.tex --latex-engine=xelatex'
+}
+
+task pandocResumeWin(type: Exec) {
+    commandLine 'cmd', '/c', 'pandoc .\\src\\res\\data.yml -o output\\resume.pdf --template=src\\resume.tex --latex-engine=xelatex'
+}
+
+task pandocCvWin(type: Exec) {
+    commandLine 'cmd', '/c', 'pandoc .\\src\\res\\data.yml -o output\\cv.pdf --template=src\\cv.tex --latex-engine=xelatex'
+}
