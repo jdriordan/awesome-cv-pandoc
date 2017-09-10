@@ -2,29 +2,30 @@ group 'de.interoberlin'
 version '0.0.1'
 
 task clean(type: Delete) {
+    dependsOn 'createOutputDir'
     delete fileTree('output').include('**/*')
 }
 
-task pandocWin {
+task pandoc {
     dependsOn 'clean'
-    dependsOn 'createOutputDir'
-    dependsOn 'pandocCoverletterWin'
-    dependsOn 'pandocResumeWin'
-    dependsOn 'pandocCvWin'
+    dependsOn 'pandocCoverletter'
+    dependsOn 'pandocResume'
+    dependsOn 'pandocCV'
 }
 
 task createOutputDir() {
     mkdir('./output')
 }
 
-task pandocCoverletterWin(type: Exec) {
-    commandLine 'cmd', '/c', 'pandoc .\\src\\res\\data.yml -o output\\coverletter.pdf --template=src\\coverletter.tex --latex-engine=xelatex'
+task pandocCoverletter(type: Exec) {
+    commandLine 'pandoc', './src/res/data.yml', '-o', './output/coverletter.pdf', '--template=src/coverletter.tex', '--latex-engine=xelatex'
 }
 
-task pandocResumeWin(type: Exec) {
-    commandLine 'cmd', '/c', 'pandoc .\\src\\res\\data.yml -o output\\resume.pdf --template=src\\resume.tex --latex-engine=xelatex'
+task pandocResume(type: Exec) {
+    commandLine 'pandoc', './src/res/data.yml', '-o', './output/resume.pdf', '--template=src/resume.tex', '--latex-engine=xelatex'
 }
 
-task pandocCvWin(type: Exec) {
-    commandLine 'cmd', '/c', 'pandoc .\\src\\res\\data.yml -o output\\cv.pdf --template=src\\cv.tex --latex-engine=xelatex'
+
+task pandocCV(type: Exec) {
+    commandLine 'pandoc', './src/res/data.yml', '-o', './output/cv.pdf', '--template=src/cv.tex', '--latex-engine=xelatex'
 }
