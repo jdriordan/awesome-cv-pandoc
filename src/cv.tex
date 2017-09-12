@@ -75,216 +75,255 @@ $endif$
 %-------------------------------------------------------------------------------
 \begin{document}
 
-% Print the header with above personal informations
-% Give optional argument to change alignment(C: center, L: left, R: right)
-\makecvheader
+    % Print the header with above personal informations
+    % Give optional argument to change alignment(C: center, L: left, R: right)
+    \makecvheader
 
-% Print the footer with 3 arguments(<left>, <center>, <right>)
-% Leave any of these blank if they are not needed
-\makecvfooter
-  {\today}
-  {$first_name$ $last_name$~~~\textperiodcentered~~~Curriculum Vitae}
-  {\thepage}
+    % Print the footer with 3 arguments(<left>, <center>, <right>)
+    % Leave any of these blank if they are not needed
+    \makecvfooter
+    {\today}
+    {$first_name$ $last_name$~~~\textperiodcentered~~~Curriculum Vitae}
+    {\thepage}
 
 
-%-------------------------------------------------------------------------------
-%	CV/RESUME CONTENT
-%	Each section is imported separately, open each file in turn to modify content
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	CV/RESUME CONTENT
+    %	Each section is imported separately, open each file in turn to modify content
+    %-------------------------------------------------------------------------------
 
-%-------------------------------------------------------------------------------
-%	EDUCATION
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	EDUCATION
+    %-------------------------------------------------------------------------------
 
-$if(education)$
-\cvsection{$education_title$}
+    $if(education)$
+    \cvsection{$education_title$}
 
-\begin{cventries}
-  $for(education)$
-  \cventry
-  {$education.degree$} % Degree
-  {$education.institution$} % Institution
-  {$education.location$} % Location
-  {$education.date$} % Date(s)
-  {
-  \begin{cvitems}
-    $for(education.description)$
-    \item {$education.description.text$}
-    $endfor$
-  \end{cvitems}
-  }
-  $endfor$
-\end{cventries}
-$endif$
+    \begin{cventries}
+        $for(education)$
+        \cventry
+        {$education.degree$} % Degree
+        {$education.institution$} % Institution
+        {$education.location$} % Location
+        {$education.date$} % Date(s)
+        {
+        \begin{cvitems}
+            $for(education.description)$
+            \item {$education.description.text$}
+            $endfor$
+        \end{cvitems}
+        }
+        $endfor$
+    \end{cventries}
+    $endif$
 
-%-------------------------------------------------------------------------------
-%	SKILLS
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	SKILLS
+    %-------------------------------------------------------------------------------
 
-$if(skill)$
-\cvsection{$skills_title$}
+    $if(skill)$
+    \cvsection{$skills_title$}
 
-\begin{cvskills}
-  $for(skill)$
-  \cvskill
-  {$skill.category$}
-  {
-  $for(skill.subskill)$
-  $skill.subskill$$skill_separator$
-  $endfor$
-  }
-  $endfor$
-\end{cvskills}
-$endif$
+    \begin{cvskills}
+        $for(skill)$
+        \cvskill
+        {$skill.category$}
+        {
+        $for(skill.subskill)$
+        $skill.subskill$$skill_separator$
+        $endfor$
+        }
+        $endfor$
+    \end{cvskills}
+    $endif$
 
-%-------------------------------------------------------------------------------
-%	EXPERIENCE
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	EXPERIENCE
+    %-------------------------------------------------------------------------------
 
-$if(experience)$
-\cvsection{$experience_title$}
+    $if(experience)$
+    \cvsection{$experience_title$}
 
-\begin{cventries}
-  $for(experience)$
-  \cventry
-  {$experience.jobtitle$}
-  {$experience.organization$}
-  {$experience.location$}
-  {$experience.date$}
-  {
-  \begin{cvitems}
-    $for(experience.task)$
-    \item {$experience.task$}
-    $endfor$
-  \end{cvitems}
-  }
-  $endfor$
-\end{cventries}
-$endif$
+    \begin{cventries}
+        $for(experience)$
+        \cventry
+        {$experience.jobtitle$}
+        {$experience.organization$}
+        {$experience.location$}
+        {$experience.date$}
+        {
+        \begin{cvitems}
+            $for(experience.task)$
+            \item {$experience.task$}
+            $endfor$
+        \end{cvitems}
+        }
+        $endfor$
+    \end{cventries}
+    $endif$
 
-%-------------------------------------------------------------------------------
-%	EXTRACURRICULAR ACTIVITIES
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	CERTICIATIONS
+    %-------------------------------------------------------------------------------
 
-$if(extracurricular)$
-\cvsection{$extracurricular_title$}
+    $if(certification)$
+    \cvsection{$certification_title$}
 
-\begin{cventries}
-  $for(extracurricular)$
-  \cventry
-  {$extracurricular.role$} % Affiliation/role
-  {$extracurricular.organization$} % Organization/group
-  {$extracurricular.location$} % Location
-  {extracurricular.date} % Date(s)
-  {
-  \begin{cvitems}
-    $for(extracurricular.contribution)$
-    \item {$extracurricular.contribution$}
-    $endfor$
-  \end{cvitems}
-  }
-  $endfor$
-\end{cventries}
-$endif$
+    \begin{cventries}
+        $for(certification)$
+        \cventry
+        {$certification.certification_authority$}
+        {$certification.title$}
+        {$certification.location$}
+        {$certification.date$}
+        {}
+        $endfor$
+    \end{cventries}
+    $endif$
 
-%-------------------------------------------------------------------------------
-%	HONORS AND AWARDS
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	EXTRACURRICULAR ACTIVITIES
+    %-------------------------------------------------------------------------------
 
-$if(honor_domestic)$
-\cvsection{$honors_title$}
+    $if(extracurricular)$
+    \cvsection{$extracurricular_title$}
 
-\cvsubsection{$honors_international_title$}
+    \begin{cventries}
+        $for(extracurricular)$
+        \cventry
+        {$extracurricular.role$} % Affiliation/role
+        {$extracurricular.organization$} % Organization/group
+        {$extracurricular.location$} % Location
+        {$extracurricular.date$} % Date(s)
+        {
+        \begin{cvitems}
+            $for(extracurricular.contribution)$
+            \item {$extracurricular.contribution$}
+            $endfor$
+        \end{cvitems}
+        }
+        $endfor$
+    \end{cventries}
+    $endif$
 
-\begin{cvhonors}
-  $for(honor_international)$
-  \cvhonor
-  {$honor_international.award$} % Award
-  {$honor_international.event$} % Event
-  {$honor_international.location$} % Location
-  {$honor_international.date$} % Date(s)
-  $endfor$
-\end{cvhonors}
+    %-------------------------------------------------------------------------------
+    %	HONORS AND AWARDS
+    %-------------------------------------------------------------------------------
 
-\cvsubsection{$honors_domestic_title$}
+    \cvsection{$honors_title$}
 
-\begin{cvhonors}
-  $for(honor_domestic)$
-  \cvhonor
-  {$honor_domestic.award$} % Award
-  {$honor_domestic.event$} % Event
-  {$honor_domestic.location$} % Location
-  {$honor_domestic.date$} % Date(s)
-  $endfor$
-\end{cvhonors}
-$endif$
+    $if(honor_international)$
+    \cvsubsection{$honors_international_title$}
 
-%-------------------------------------------------------------------------------
-%	PRESENTATION
-%-------------------------------------------------------------------------------
+    \begin{cvhonors}
+        $for(honor_international)$
+        \cvhonor
+        {$honor_international.award$} % Award
+        {$honor_international.event$} % Event
+        {$honor_international.location$} % Location
+        {$honor_international.date$} % Date(s)
+        $if(honor_international.description)$
+        {
+        \begin{cvitems}
+            $for(honor_international.description)$
+            \item {$honor_international.description$}
+            $endfor$
+        \end{cvitems}
+        }
+        $endif$
+        $endfor$
+    \end{cvhonors}
+    $endif$
 
-$if(presentation)$
-\cvsection{$presentation_title$}
+    $if(honor_domestic)$
+    % \cvsubsection{$honors_domestic_title$}
 
-\begin{cventries}
-  $for(presentation)$
-  \cventry
-  {$presentation.role$} % Role
-  {$presentation.event$} % Event
-  {$presentation.location$} % Location
-  {$presentation.date$} % Date(s)
-  {
-  \begin{cvitems}
-    $for(presentation.description)$
-    \item {$presentation.description$}
-    $endfor$
-  \end{cvitems}
-  }
-  $endfor$
-\end{cventries}
-$endif$
+    \begin{cvhonors}
+        $for(honor_domestic)$
+        \cvhonor
+        {$honor_domestic.award$} % Award
+        {$honor_domestic.event$} % Event
+        {$honor_domestic.location$} % Location
+        {$honor_domestic.date$} % Date(s)
+        $if(honor_domestic.description)$
+        {
+        \begin{cvitems}
+            $for(honor_domestic.description)$
+            \item {$honor_domestic.description$}
+            $endfor$
+        \end{cvitems}
+        }
+        $endif$
+        $endfor$
+    \end{cvhonors}
+    $endif$
 
-%-------------------------------------------------------------------------------
-%	WRITING
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	PRESENTATION
+    %-------------------------------------------------------------------------------
 
-$if(writing)$
-\cvsection{$writing_title$}
+    $if(presentation)$
+    \cvsection{$presentation_title$}
 
-\begin{cventries}
-  $for(writing)$
-  \cventry
-  {$writing.role$} % Role
-  {$writing.event$} % Event
-  {$writing.location$} % Location
-  {$writing.date$} % Date(s)
-  {
-  \begin{cvitems}
-    $for(writing.description)$
-    \item {$writing.description$}
-    $endfor$
-  \end{cvitems}
-  }
-  $endfor$
-\end{cventries}
-$endif$
+    \begin{cventries}
+        $for(presentation)$
+        \cventry
+        {$presentation.role$} % Role
+        {$presentation.event$} % Event
+        {$presentation.location$} % Location
+        {$presentation.date$} % Date(s)
+        {
+        \begin{cvitems}
+            $for(presentation.description)$
+            \item {$presentation.description$}
+            $endfor$
+        \end{cvitems}
+        }
+        $endfor$
+    \end{cventries}
+    $endif$
 
-%-------------------------------------------------------------------------------
-%	Program Committees
-%-------------------------------------------------------------------------------
+    %-------------------------------------------------------------------------------
+    %	WRITING
+    %-------------------------------------------------------------------------------
 
-$if(committee)$
-\cvsection{$committee_title$}
+    $if(writing)$
+    \cvsection{$writing_title$}
 
-\begin{cvhonors}
-  $for(committee)$
-  \cvhonor
-  {$committee.position$} % Position
-  {$committee.committee$} % Committee
-  {$committee.location$} % Location
-  {$committee.date$} % Date(s)
-  $endfor$
-\end{cvhonors}
-$endif$
+    \begin{cventries}
+        $for(writing)$
+        \cventry
+        {$writing.role$} % Role
+        {$writing.title$} % Title
+        {$writing.location$} % Location
+        {$writing.date$} % Date(s)
+        {
+        \begin{cvitems}
+            $for(writing.description)$
+            \item {$writing.description$}
+            $endfor$
+        \end{cvitems}
+        }
+        $endfor$
+    \end{cventries}
+    $endif$
+
+    %-------------------------------------------------------------------------------
+    %	Program Committees
+    %-------------------------------------------------------------------------------
+
+    $if(committee)$
+    \cvsection{$committee_title$}
+
+    \begin{cvhonors}
+        $for(committee)$
+        \cvhonor
+        {$committee.position$} % Position
+        {$committee.committee$} % Committee
+        {$committee.location$} % Location
+        {$committee.date$} % Date(s)
+        $endfor$
+    \end{cvhonors}
+    $endif$
 
 \end{document}

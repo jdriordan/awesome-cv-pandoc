@@ -79,12 +79,12 @@ $endif$
 %-------------------------------------------------------------------------------
 % The company being applied to
 \recipient
-  {$recipient_department$}
-  {$recipient_company$}
+{$recipient_department$}
+{$recipient_company$}
 % The date on the letter, default is the date of compilation
 \letterdate{\today}
 % The title of the letter
-\lettertitle{$letter_title$}
+\lettertitle{$letter_title$ $job_title$}
 % How the letter is opened
 \letteropening{$letter_operning$}
 % How the letter is closed
@@ -96,39 +96,39 @@ $endif$
 %-------------------------------------------------------------------------------
 \begin{document}
 
-% Print the header with above personal informations
-% Give optional argument to change alignment(C: center, L: left, R: right)
-\makecvheader[R]
+    % Print the header with above personal informations
+    % Give optional argument to change alignment(C: center, L: left, R: right)
+    \makecvheader[R]
 
-% Print the footer with 3 arguments(<left>, <center>, <right>)
-% Leave any of these blank if they are not needed
-\makecvfooter
-  {\today}
-  {$first_name$ $last_name$~~~\textperiodcentered~~~$cover_letter_title$}
-  {}
+    % Print the footer with 3 arguments(<left>, <center>, <right>)
+    % Leave any of these blank if they are not needed
+    \makecvfooter
+    {\today}
+    {$first_name$ $last_name$~~~\textperiodcentered~~~$cover_letter_title$}
+    {}
 
-% Print the title with above letter informations
-\makelettertitle
+    % Print the title with above letter informations
+    \makelettertitle
 
-%-------------------------------------------------------------------------------
-%	LETTER CONTENT
-%-------------------------------------------------------------------------------
-\begin{cvletter}
+    %-------------------------------------------------------------------------------
+    %	LETTER CONTENT
+    %-------------------------------------------------------------------------------
+    \begin{cvletter}
 
-\lettersection{$about_me_title$}
-$about_me_content$
+        \lettersection{$about_me_title$}
+        $about_me_content$
 
-\lettersection{$why_company_title$}
-$why_company_content$
+        \lettersection{$why_company_title$}
+        $why_company_content$
 
-\lettersection{$why_me_title$}
-$why_me_content$
+        \lettersection{$why_me_title$}
+        $why_me_content$
 
-\end{cvletter}
+    \end{cvletter}
 
 
-%-------------------------------------------------------------------------------
-% Print the signature and enclosures with above letter informations
-\makeletterclosing
+    %-------------------------------------------------------------------------------
+    % Print the signature and enclosures with above letter informations
+    \makeletterclosing
 
 \end{document}

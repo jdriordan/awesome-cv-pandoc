@@ -1,31 +1,42 @@
 group 'de.interoberlin'
 version '0.0.1'
 
+ext.output_file_prefix = output_file_prefix
+
+def ft = fileTree(dir: 'src/res/companies')
+
+ft.each { f ->
+    def company_name = f.name.replace('.yml', '')
+
+    task "createOutputDir$company_name" {
+        mkdir('./output/' + company_name)
+    }
+
+    task "pandocCV$company_name"(type: Exec) {
+        commandLine 'pandoc', './src/res/data.yml', '-o', './output/' + company_name + '/' + output_file_prefix + 'cv.pdf', '--template=src/cv.tex', '--latex-engine=xelatex'
+    }
+
+    task "pandocResume$company_name"(type: Exec) {
+        commandLine 'pandoc', './src/res/data.yml', '-o', './output/' + company_name + '/' + output_file_prefix + 'resume.pdf', '--template=src/resume.tex', '--latex-engine=xelatex'
+    }
+
+    task "pandocCoverletter$company_name"(type: Exec) {
+        commandLine 'pandoc', './src/res/companies/' + f.name, './src/res/data.yml', '-o', './output/' + company_name + '/' + output_file_prefix + 'coverletter.pdf', '--template=src/coverletter.tex', '--latex-engine=xelatex'
+    }
+}
+
 task clean(type: Delete) {
-    dependsOn 'createOutputDir'
     delete fileTree('output').include('**/*')
 }
 
 task pandoc {
     dependsOn 'clean'
-    dependsOn 'pandocCoverletter'
-    dependsOn 'pandocResume'
-    dependsOn 'pandocCV'
-}
 
-task createOutputDir() {
-    mkdir('./output')
-}
-
-task pandocCoverletter(type: Exec) {
-    commandLine 'pandoc', './src/res/data.yml', '-o', './output/coverletter.pdf', '--template=src/coverletter.tex', '--latex-engine=xelatex'
-}
-
-task pandocResume(type: Exec) {
-    commandLine 'pandoc', './src/res/data.yml', '-o', './output/resume.pdf', '--template=src/resume.tex', '--latex-engine=xelatex'
-}
-
-
-task pandocCV(type: Exec) {
-    commandLine 'pandoc', './src/res/data.yml', '-o', './output/cv.pdf', '--template=src/cv.tex', '--latex-engine=xelatex'
+    ft.each { f ->
+        def company_name = f.name.replace('.yml', '')
+        dependsOn "createOutputDir$company_name"
+        dependsOn "pandocCoverletter$company_name"
+        dependsOn "pandocResume$company_name"
+        dependsOn "pandocCV$company_name"
+    }
 }
