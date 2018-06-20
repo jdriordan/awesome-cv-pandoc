@@ -621,9 +621,10 @@ BoldItalicFont=*-MediumItalic,
 }
 % Define a line of cv information(honor, award or something else)
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
-\newcommand*{\cvhonor}[5]{%
+\newcommand*{\cvhonor}[4]{%5]{%
 \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} & \honorlocationstyle{#3} \\
-& \descriptionstyle{#5}
+%& \descriptionstyle{#5}
+% jdriordan: someone was clearly halfway through adding a description parameter...
 }
 
 % Define an environment for cvskill
